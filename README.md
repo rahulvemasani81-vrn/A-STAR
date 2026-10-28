@@ -1,13 +1,17 @@
 <h1>ExpNo 4 : Implement A* search algorithm for a Graph</h1> 
-<h3>Name:Rahul       </h3>
-<h3>Register Number:212225230294
-date: 27-10-2026</h3>
+
+```
+Name: Rahul
+Register Number:  212225230294
+Date: 27.10.2026
+```
+
 <H3>Aim:</H3>
 <p>To ImplementA * Search algorithm for a Graph using Python 3.</p>
 <H3>Algorithm:</H3>
 
-``````
-// A* Search Algorithm
+
+
 1.  Initialize the open list
 2.  Initialize the closed list
     put the starting node on the open 
@@ -25,7 +29,7 @@ date: 27-10-2026</h3>
     d) for each successor
         i) if successor is the goal, stop search
         
-        ii) else, compute both g and h for successor
+   ii) else, compute both g and h for successor
           successor.g = q.g + distance between 
                               successor and q
           successor.h = distance from goal to 
@@ -34,22 +38,21 @@ date: 27-10-2026</h3>
           Manhattan, Diagonal and Euclidean 
           Heuristics)
           
-          successor.f = successor.g + successor.h
-
-        iii) if a node with the same position as 
+successor.f = successor.g + successor.h
+          
+iii) if a node with the same position as 
             successor is in the OPEN list which has a 
            lower f than successor, skip this successor
 
-        iV) if a node with the same position as 
+iV) if a node with the same position as 
             successor  is in the CLOSED list which has
             a lower f than successor, skip this successor
             otherwise, add  the node to the open list
-     end (for loop)
+            end (for loop)
   
-    e) push q on the closed list
-    end (while loop)
+e) push q on the closed list
+end (while loop)
 
-``````
 
 <hr>
 <h2>Sample Graph I</h2>
@@ -118,8 +121,12 @@ G 0 <br>
 <h2>Sample Output</h2>
 <hr>
 Path found: ['A', 'E', 'D', 'G']
-## program:
-~~~
+
+<H3>Program:</H3>
+
+```python
+
+
 from collections import defaultdict
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -130,10 +137,10 @@ def a_star(graph, heuristic, start, goal):
     g = {start: 0}
     parent = {start: None}
 
- while open_set:
+    while open_set:
         current = min(open_set, key=lambda node: g[node] + heuristic[node])
 
- if current == goal:
+        if current == goal:
             path = []
             while current is not None:
                 path.append(current)
@@ -143,10 +150,10 @@ def a_star(graph, heuristic, start, goal):
             print("Total Cost :", g[goal])
             return path
 
-open_set.remove(current)
+        open_set.remove(current)
         closed_set.add(current)
 
- for neighbour, cost in graph[current]:
+        for neighbour, cost in graph[current]:
             if neighbour in closed_set:
                 continue
             new_cost = g[current] + cost
@@ -157,8 +164,8 @@ open_set.remove(current)
             g[neighbour] = new_cost
             parent[neighbour] = current
 
-print("Path does not exist!")
-return None
+    print("Path does not exist!")
+    return None
 
 graph = defaultdict(list)
 G = nx.Graph()
@@ -209,16 +216,25 @@ else:
             path_edges.append((shortest_path[i], shortest_path[i+1]))
         plt.figure(figsize=(8,6))
 
-nx.draw_networkx_nodes(G, pos, node_color="skyblue",  node_size=1800)
+        nx.draw_networkx_nodes(G, pos, node_color="skyblue",  node_size=1800)
         nx.draw_networkx_labels(G, pos, font_size=12,   font_weight="bold")
 
- # Draw all edges
-nx.draw_networkx_edges(G , pos, edge_color="gray", width=2)
+        # Draw all edges
+        nx.draw_networkx_edges(G , pos, edge_color="gray", width=2)
 
-# Highlight shortest path
-nx.draw_networkx_edges(G, pos,  edgelist=path_edges, edge_color="red", width=4)
+        # Highlight shortest path
+        nx.draw_networkx_edges(G, pos,  edgelist=path_edges, edge_color="red", width=4)
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
         plt.title("Shortest Path Highlighted (Red)")
         plt.axis("off")
         plt.show()
-~~~
+
+```
+<H3>output:</H3>
+
+<img width="638" height="831" alt="image" src="https://github.com/user-attachments/assets/9cb84cb2-1a26-45cb-95ed-d1ebe49f5b2c" />
+
+<hr>
+<h3>Result:</h3>
+<hr>
+<p>Thus,The A* search algorithm was implemented successfully. The shortest path from A to G is A → B → D → G, with a total cost of 6.</p>
